@@ -2,43 +2,39 @@ import sys
 sys.setrecursionlimit(1000000)
 input = sys.stdin.readline
 
-
-N = int(input())
+n = int(input())
 graph = []
-num = []
+dx = [1,-1,0,0]
+dy = [0,0,1,-1]
 
-for _ in range(N):
+for _ in range(n):
     graph.append(list(map(int, input().strip())))
 
-dx = [0, 0, 1, -1]
-dy = [1, -1, 0, 0]
-    
 def dfs(x,y):
-    if x<0 or x>=N or y<0 or y>=N:
+    if x<0 or x>=n or y<0 or y>=n:
         return False
     if graph[x][y]:
         global cnt
-        cnt +=1
+        cnt+=1
         graph[x][y] = 0
         for i in range(4):
             nx = x + dx[i]
             ny = y + dy[i]
-            dfs(nx, ny)
+            dfs(nx,ny)
         return True
     return False
 
 cnt = 0
-result =0
+result = []
 
-for i in range(N):
-    for j in range(N):
-        if dfs(i,j):
-            num.append(cnt)
-            result +=1
+for i in range(n):
+    for j in range(n):
+        if graph[i][j]:
+            dfs(i,j)
+            result.append(cnt)
             cnt = 0
 
-num.sort()
-
-print(result)
-for i in range(result):
-    print(num[i])
+result.sort()
+print(len(result))
+for i in range(len(result)):
+    print(result[i])
