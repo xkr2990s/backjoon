@@ -2,15 +2,6 @@ import sys
 import heapq
 input = sys.stdin.readline
 
-def get_smallest_node():
-    min_val = float('INF')
-    index = 0
-    for i in range(1, node+1):
-        if distance[i]<min_val and not visited[i]:
-            min_val = distance[i]
-            index = i
-    return index
-
 def dijkstra(start):
     q = []
     heapq.heappush(q, (0, start))
